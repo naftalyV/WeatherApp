@@ -8,7 +8,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                    <Button Command="{BindingContext.CitySelectedCommand,Source={x:Referene MainListView}}"
+                        <Button Command="{Binding BindingContext.CitySelectedCommand, Source={x:Reference MainListView}}"
                                     CommandParameter="{Binding}"
                                     Text="{Binding CityName}"
                                     TextColor="Red"/>
