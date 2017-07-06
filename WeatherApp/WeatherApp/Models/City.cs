@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeatherApp.Models
 {
-    class City
+  public class City
     {
         public City(string cityN,string cityCoor)
         {
