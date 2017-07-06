@@ -8,12 +8,12 @@ using WeatherApp.Models;
 
 namespace WeatherApp.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel :BaseViewModel
     {
         private string _url = "https://api.darksky.net/forecast/8585a7719c87d730bfb90432ebf08832/{0},{1}";
-        public event PropertyChangedEventHandler PropertyChanged;
+       
         private string _mainText;
-      //  private readonly List<city> _dataSource;
+        private readonly List<City> _dataSource;
 
         public string MainText
         {
@@ -21,7 +21,7 @@ namespace WeatherApp.ViewModels
             set
             {
                 _mainText = value;
-                OnPropertyChanged("MainText");
+                OnPropertyChanged(()=>MainText);
             }
         }
 
@@ -29,14 +29,21 @@ namespace WeatherApp.ViewModels
         {
             MainText = "Loading...";
 
-           // _dataSource=new List<city>
-            var client = new HttpClient();
-
-            Task.Run(async() =>
+            _dataSource = new List<City>
+            {
+                new City("Tel-Aviv","32.0853,34.7818"),
+                new City("New-York","40.7128,74.0059"),
+                new City("Paris","48.8566,2.3522")
+            };
+        }
+        private   async Task CitySelectedCommandAction(City city)
+            {
+ var client = new HttpClient();
+            
             {
                 try
                 {
-                    var result = await client.GetStringAsync(string.Format(_url, "38.9072", "77.0369")); // Get Json string
+                    var result = await client.GetStringAsync(string.Format(_url,city.CityCoordinate)); // Get Json string
                     //var model = JsonConvert.DeserializeObject(result); // Turn Json into object
                     var model = JsonConvert.DeserializeObject<RootObject>(result); // Turn Json into specific type
                     MainText = model.currently.temperature.ToString();
@@ -45,12 +52,12 @@ namespace WeatherApp.ViewModels
                 {
                     // log excepion
                 }
-            });            
+            };            
+            }
+           
+
         }
 
-        public void OnPropertyChanged(string propName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
+     
     }
 }
