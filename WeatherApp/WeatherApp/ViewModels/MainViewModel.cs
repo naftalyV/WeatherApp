@@ -10,9 +10,10 @@ using Xamarin.Forms;
 
 namespace WeatherApp.ViewModels
 {
-    public class MainViewModel : BaseViewModel
+    public class MainViewModel : BaseViewModel//;
     {
-        private string _url = "https://api.darksky.net/forecast/8585a7719c87d730bfb90432ebf08832/{0},{1}";
+                               // https://api.darksky.net/forecast/8585a7719c87d730bfb90432ebf08832/{0}?units=auto
+        private string _url = "https://api.darksky.net/forecast/8585a7719c87d730bfb90432ebf08832/{0}?units=auto";
 
         private string _mainText;
         private IEnumerable<City> _dataSource;
@@ -59,7 +60,7 @@ namespace WeatherApp.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    // log excepion
+                    MainText = ex.Message;
                 }
             };
         }

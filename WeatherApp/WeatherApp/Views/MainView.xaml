@@ -18,8 +18,9 @@
             </ListView>
 
             <Label Text="{Binding MainText}"
-                   TextColor="Yellow"
+                   TextColor="Black"
                    FontSize="24"
+                   VerticalTextAlignment="Center"
                    HorizontalTextAlignment="Center"/>
         </StackLayout>
     
